@@ -10,4 +10,6 @@ extern int control_mode;
 extern float drive_speed;
 
 // Autonomous
-extern int auton_num;
+extern int auton_mode;
+extern const char *control_types[6];
+extern const char *auton_types[4];

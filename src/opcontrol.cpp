@@ -4,21 +4,25 @@ void opcontrol(void) {
   while (true) {
     C_SCREEN.print("DRIVER CONTROL");
     // Drive
-    if (control_mode == 0) {      // tank std
-      drive_r.spin(DIR_FWD, RIGHT_STICK_Y * drive_speed, VEL_PCT);
-      drive_l.spin(DIR_FWD, LEFT_STICK_Y * drive_speed, VEL_PCT);
-    }
-    if (control_mode == 1) {      // osa std
-      drive_r.spin(DIR_FWD, (LEFT_STICK_Y - LEFT_STICK_X * SENSITIVITY) * drive_speed, VEL_PCT);
-      drive_l.spin(DIR_FWD, (LEFT_STICK_Y + LEFT_STICK_X * SENSITIVITY) * drive_speed, VEL_PCT);
-    }
-    if (control_mode == 2) {      // tank rev
-      drive_l.spin(DIR_REV, RIGHT_STICK_Y * drive_speed, VEL_PCT);
-      drive_r.spin(DIR_REV, LEFT_STICK_Y * drive_speed, VEL_PCT);
-    }
-    if (control_mode == 3) {      // osa rev
-      drive_l.spin(DIR_REV, (LEFT_STICK_Y - LEFT_STICK_X * SENSITIVITY) * drive_speed, VEL_PCT);
-      drive_r.spin(DIR_REV, (LEFT_STICK_Y + LEFT_STICK_X * SENSITIVITY) * drive_speed, VEL_PCT);
+    switch (control_mode) {
+      case 0:     // tank std
+        drive_r.spin(DIR_FWD, RIGHT_STICK_Y * drive_speed, VEL_PCT);
+        drive_l.spin(DIR_FWD, LEFT_STICK_Y * drive_speed, VEL_PCT);
+      case 1:     // osa std
+        drive_r.spin(DIR_FWD, (LEFT_STICK_Y - LEFT_STICK_X * SENSITIVITY) * drive_speed, VEL_PCT);
+        drive_l.spin(DIR_FWD, (LEFT_STICK_Y + LEFT_STICK_X * SENSITIVITY) * drive_speed, VEL_PCT);
+      case 2:     // tsa std
+        drive_r.spin(DIR_FWD, (LEFT_STICK_Y - RIGHT_STICK_X * SENSITIVITY) * drive_speed, VEL_PCT);
+        drive_l.spin(DIR_FWD, (LEFT_STICK_Y + RIGHT_STICK_X * SENSITIVITY) * drive_speed, VEL_PCT);
+      case 3:     // tank rev
+        drive_l.spin(DIR_REV, RIGHT_STICK_Y * drive_speed, VEL_PCT);
+        drive_r.spin(DIR_REV, LEFT_STICK_Y * drive_speed, VEL_PCT);
+      case 4:     // osa rev
+        drive_l.spin(DIR_REV, (LEFT_STICK_Y - LEFT_STICK_X * SENSITIVITY) * drive_speed, VEL_PCT);
+        drive_r.spin(DIR_REV, (LEFT_STICK_Y + LEFT_STICK_X * SENSITIVITY) * drive_speed, VEL_PCT);
+      case 5:     // tsa rev
+        drive_l.spin(DIR_REV, (LEFT_STICK_Y - RIGHT_STICK_X * SENSITIVITY) * drive_speed, VEL_PCT);
+        drive_r.spin(DIR_REV, (LEFT_STICK_Y + RIGHT_STICK_X * SENSITIVITY) * drive_speed, VEL_PCT);
     }
 
     // Intake
