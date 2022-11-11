@@ -11,6 +11,7 @@
 #include "robot-config.h"
 #include "stddefs.h"
 #include "globals.h"
+#include "util.h"
 
 // Main function declarations
 void pre_auton(void);

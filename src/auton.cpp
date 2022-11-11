@@ -2,9 +2,13 @@
 
 void autonomous(void) {
   switch (auton_mode) {
-    case 0:
+    case AWP:
       //tmp
-    case 1:
-      printf("tmp");
+    case HALF_AWP_L:
+      //tmp
+    case HALF_AWP_R:
+      //tmp
+    case ROLLER:
+      short tmp;
   }
 }

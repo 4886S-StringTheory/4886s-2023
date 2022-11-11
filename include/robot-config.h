@@ -30,3 +30,5 @@ extern vision front_optics;
 // Motor groups
 extern motor_group drive_r;
 extern motor_group drive_l;
+
+extern timer sands_of_time;

@@ -6,7 +6,7 @@ using namespace vex;
 brain Brain;
 controller master;
 
-// All perpetrators of movement
+// All perpetrators of motion
 motor drive_rf = motor(PORT1, DRIVE_GEARING, false);
 motor drive_rb = motor(PORT2, DRIVE_GEARING, false);
 motor drive_lf = motor(PORT3, DRIVE_GEARING, true);
@@ -29,5 +29,7 @@ vision rear_optics = vision(PORT19, 0, REAR_RED_GOAL, REAR_BLUE_GOAL, REAR_DISC)
 vision front_optics = vision(PORT20, 0, FRONT_RED_GOAL, FRONT_BLUE_GOAL, FRONT_DISC);
 
 // Motor groups
-  motor_group drive_r (drive_rf, drive_rb);
-  motor_group drive_l (drive_lf, drive_lb);
+motor_group drive_r (drive_rf, drive_rb);
+motor_group drive_l (drive_lf, drive_lb);
+
+timer sands_of_time;
