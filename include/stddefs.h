@@ -78,6 +78,10 @@
 // for use with brain named 'Brain'
 #define BATTERY Brain.Battery
 #define B_SCREEN Brain.Screen
+#define B_SCRN_WIDTH 480
+#define B_SCRN_HEIGHT 272
+#define B_SCRN_XMID (B_SCRN_WIDTH / 2)
+#define B_SCRN_YMID (B_SCRN_HEIGHT / 2)
 
 // Sensor Values
 // for use with inertial sensor named 'inrtl' and vision sensor names 'vis'
