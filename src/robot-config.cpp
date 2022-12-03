@@ -7,13 +7,14 @@ brain Brain;
 controller master;
 
 // All perpetrators of motion
-motor drive_rf = motor(PORT1, DRIVE_GEARING, false);
-motor drive_rb = motor(PORT2, DRIVE_GEARING, false);
-motor drive_lf = motor(PORT3, DRIVE_GEARING, true);
-motor drive_lb = motor(PORT4, DRIVE_GEARING, true);
-motor flywheel = motor(PORT5, FLYWHEEL_GEARING, false);
-motor roller = motor(PORT20, ROLLER_GEARING, false);
-motor intake = motor(PORT11, INTAKE_GEARING, true);
+motor drive_rf = motor(PORT1, DRIVE_INSERT, false);
+motor drive_rb = motor(PORT2, DRIVE_INSERT, false);
+motor drive_lf = motor(PORT3, DRIVE_INSERT, true);
+motor drive_lb = motor(PORT4, DRIVE_INSERT, true);
+motor flywheel = motor(PORT5, FLYWHEEL_INSERT, false);
+motor roller = motor(PORT20, ROLLER_INSERT, false);
+motor intake = motor(PORT11, INTAKE_INSERT, true);
+digital_out expansion = digital_out(PORTA);
 
 // Signaures for vision
 vision::signature REAR_RED_GOAL = vision::signature(0, 0, 0, 0, 0, 0, 0, 0, 0);

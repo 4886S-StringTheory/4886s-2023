@@ -13,6 +13,7 @@ extern motor flywheel_a;
 extern motor flywheel_b;
 extern motor intake;
 extern motor roller;
+extern digital_out expansion;
 
 // Vision signatures
 extern vision::signature REAR_RED_GOAL;

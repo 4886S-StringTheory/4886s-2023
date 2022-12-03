@@ -1,8 +1,12 @@
-// Motor gearings
-#define DRIVE_GEARING TRB_MTR
-#define FLYWHEEL_GEARING TRB_MTR
-#define INTAKE_GEARING SPD_MTR
-#define ROLLER_GEARING SPD_MTR
+// Gearings
+#define DRIVE_GEARING (GEAR_48 / GEAR_72)
+#define DRIVE_IN_REV (DRIVE_GEARING * PI * TRACT_WHEEL_DIAM)
+
+// Motor inserts
+#define DRIVE_INSERT TRB_INSERT
+#define FLYWHEEL_INSERT TRB_INSERT
+#define INTAKE_INSERT SPD_INSERT
+#define ROLLER_INSERT SPD_INSERT
 
 // Autonmous modes
 #define AWP 0

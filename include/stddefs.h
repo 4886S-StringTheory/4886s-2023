@@ -5,9 +5,9 @@
 #define PI 3.1415926535897932384626433832795
 
 // Ratios
-#define TRQ_MTR gearSetting::ratio36_1
-#define SPD_MTR gearSetting::ratio18_1
-#define TRB_MTR gearSetting::ratio6_1
+#define TRQ_INSERT gearSetting::ratio36_1
+#define SPD_INSERT gearSetting::ratio18_1
+#define TRB_INSERT gearSetting::ratio6_1
 
 #define STICK_TRQ 1
 #define STICK_SPD 2
@@ -17,12 +17,12 @@
 #define BTN_TRB 600
 #define BTN_PCT 100
 
-#define RATIO_3_1 (1.0/3)
-#define RATIO_5_1 (1.0/5)
-#define RATIO_7_1 (1.0/7)
-#define RATIO_1_3 3.0
-#define RATIO_1_5 5.0
-#define RATIO_1_7 7.0
+#define GEAR_12 12.0
+#define GEAR_36 36.0
+#define GEAR_48 48.0
+#define GEAR_60 60.0
+#define GEAR_72 72.0
+#define GEAR_84 84.0
 
 // Wheels
 #define LRG_OMNI_DIAM 4
