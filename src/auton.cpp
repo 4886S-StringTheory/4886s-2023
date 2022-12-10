@@ -9,8 +9,8 @@ void autonomous(void) {
     case HALF_AWP_R:
       //tmp
     case ROLLER:
-      drive_l.spinFor(DIR_FWD, -1 * DRIVE_IN_REV, ROT_REV, false);
-      drive_r.spinFor(DIR_FWD, -1 * DRIVE_IN_REV, ROT_REV, true);
+      drive_l.spinFor(DIR_FWD, -1 / DRIVE_REV_IN, ROT_REV, false);
+      drive_r.spinFor(DIR_FWD, -1 / DRIVE_REV_IN, ROT_REV, true);
       roller.spinFor(DIR_FWD, .25, rev, true);
   }
 }

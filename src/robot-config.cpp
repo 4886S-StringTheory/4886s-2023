@@ -12,7 +12,7 @@ motor drive_rb = motor(PORT2, DRIVE_INSERT, false);
 motor drive_lf = motor(PORT3, DRIVE_INSERT, true);
 motor drive_lb = motor(PORT4, DRIVE_INSERT, true);
 motor flywheel = motor(PORT5, FLYWHEEL_INSERT, false);
-motor roller = motor(PORT20, ROLLER_INSERT, false);
+motor roller = motor(PORT20, ROLLER_INSERT, true);
 motor intake = motor(PORT11, INTAKE_INSERT, true);
 digital_out expansion = digital_out(PORTA);
 

@@ -15,14 +15,14 @@ bool rising_edge(int val) {
 
 // returns 0 for left, 1 for right, 2 for neither
 int b_scrn_hrzside(void) {
-    if (!B_SCREEN.pressing()) return 2;
-    if (B_SCREEN.xPosition() < B_SCRN_XMID) return 0;
+    if (!B_SCRN.pressing()) return 2;
+    if (B_SCRN.xPosition() < B_SCRN_XMID) return 0;
     return 1;
 }
 
 // returns 0 for top, 1 for bottom, 2 for neither
 int b_scrn_vrtside(void) {
-    if (!B_SCREEN.pressing()) return 2;
-    if (B_SCREEN.yPosition() < B_SCRN_YMID) return 0;
+    if (!B_SCRN.pressing()) return 2;
+    if (B_SCRN.yPosition() < B_SCRN_YMID) return 0;
     return 1;
 }

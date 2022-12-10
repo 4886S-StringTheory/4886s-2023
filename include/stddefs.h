@@ -9,13 +9,13 @@
 #define SPD_INSERT gearSetting::ratio18_1
 #define TRB_INSERT gearSetting::ratio6_1
 
-#define STICK_TRQ 1
-#define STICK_SPD 2
-#define STICK_TRB 6
-#define BTN_TRQ 100
-#define BTN_SPD 200
-#define BTN_TRB 600
-#define BTN_PCT 100
+#define STICK_TRQ 1.0
+#define STICK_SPD 2.0
+#define STICK_TRB 6.0
+#define BTN_TRQ 100.0
+#define BTN_SPD 200.0
+#define BTN_TRB 600.0
+#define BTN_PCT 100.0
 
 #define GEAR_12 12.0
 #define GEAR_36 36.0
@@ -25,11 +25,11 @@
 #define GEAR_84 84.0
 
 // Wheels
-#define LRG_OMNI_DIAM 4
+#define LRG_OMNI_DIAM 4.0
 #define MED_OMNI_DIAM 3.25
 #define SML_OMNI_DIAM 2.75
-#define LRG_WHEEL_DIAM 5
-#define MED_WHEEL_DIAM 4
+#define LRG_WHEEL_DIAM 5.0
+#define MED_WHEEL_DIAM 4.0
 #define SML_WHEEL_DIAM 2.75
 #define TRACT_WHEEL_DIAM 3.25
 
@@ -42,13 +42,13 @@
 #define TRACT_WHEEL_CIRC 10.2
 
 // Unit Conversions
-#define FULL_ROT_DEG 360
-#define HALF_ROT_DEG 180
-#define QRTR_ROT_DEG 90
+#define FULL_ROT_DEG 360.0
+#define HALF_ROT_DEG 180.0
+#define QRTR_ROT_DEG 90.0
 
 #define IN_CM 2.54
 #define RAD_DEG 57.29578
-#define SEC_MSEC 1000
+#define SEC_MSEC 1000.0
 
 // Controller Parts
 // for use with controller named 'master'
@@ -77,7 +77,7 @@
 // Brain Parts
 // for use with brain named 'Brain'
 #define BATTERY Brain.Battery
-#define B_SCREEN Brain.Screen
+#define B_SCRN Brain.Screen
 #define B_SCRN_WIDTH 480
 #define B_SCRN_HEIGHT 272
 #define B_SCRN_XMID (B_SCRN_WIDTH / 2)

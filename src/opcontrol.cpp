@@ -40,11 +40,11 @@ void opcontrol(void) {
 
     // Expansion
     if (sands_of_time.time(sec) >= 95) {
-      if (BTN_Y.pressing()) expansion.set(0);
+      if (BTN_Y.pressing()) expansion.set(1);
     }
 
     // Timer - buzz w/ 20s left
-    if (sands_of_time.time(sec) > 85 && sands_of_time.time(sec) < 95.2) master.rumble("....");
+    if (sands_of_time.time(sec) > 85 && sands_of_time.time(sec) < 85.2) master.rumble("....");
 
     wait(20, msec);
   }
