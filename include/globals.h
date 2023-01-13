@@ -22,6 +22,9 @@
 #define OSA_REV 4
 #define TSA_REV 5
 
+// Misc - defines
+#define CHAR_HI 20
+
 // Control
 #define SENSITIVITY 0.75
 extern int control_mode;

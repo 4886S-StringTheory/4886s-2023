@@ -9,9 +9,10 @@
 #define SPD_INSERT gearSetting::ratio18_1
 #define TRB_INSERT gearSetting::ratio6_1
 
-#define STICK_TRQ 1.0
-#define STICK_SPD 2.0
-#define STICK_TRB 6.0
+#define STICK_TRQ (100.0 / 127.0)
+#define STICK_SPD (2 * 100.0 / 127.0)
+#define STICK_TRB (3 * 100.0 / 127.0)
+#define STICK_PCT (100.0 / 127.0)
 #define BTN_TRQ 100.0
 #define BTN_SPD 200.0
 #define BTN_TRB 600.0
@@ -115,5 +116,7 @@
 #define TRQ_INLB torqueUnits::InLb
 #define TIME_SEC timeUnits::sec
 #define TIME_MSEC timeUnits::msec
+#define TMP_C temperatureUnits::celsius
+#define TMP_F temperatureUnits::fahrenheit
 
 #endif // _STDDEFS_H_

@@ -17,3 +17,4 @@
 void pre_auton(void);
 void autonomous(void);
 void opcontrol(void);
+void debug_test(void);

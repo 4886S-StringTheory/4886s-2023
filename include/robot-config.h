@@ -6,14 +6,16 @@ extern controller master;
 
 // Perpetrators of movement
 extern motor drive_rf;
+extern motor drive_rm;
 extern motor drive_rb;
 extern motor drive_lf;
+extern motor drive_lm;
 extern motor drive_lb;
-extern motor flywheel_a;
-extern motor flywheel_b;
+extern motor flywheel;
 extern motor intake;
 extern motor roller;
 extern digital_out expansion;
+extern digital_out indexer;
 
 // Vision signatures
 extern vision::signature REAR_RED_GOAL;
