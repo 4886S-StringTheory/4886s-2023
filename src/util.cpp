@@ -1,5 +1,13 @@
 #include "../include/main.h"
 
+void pid_move(float dist, float max_vel, float accel = 24, bool decel = false) {
+    // accel
+    float vel = drive_r.velocity(VEL_RPM) + drive_l.velocity(VEL_RPM) / 2;
+    float pos = 
+    float target_vel = vel;
+    while ()
+}
+
 // rising edge detection - wip
 bool rising_edge(int val) {
     //printf("val: %i\n", val);

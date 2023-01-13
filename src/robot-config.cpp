@@ -8,15 +8,14 @@ controller master;
 
 // All perpetrators of motion
 // Bad Ports: 13
-motor drive_rf = motor(PORT11, DRIVE_INSERT, false);
-motor drive_rm = motor(PORT13, DRIVE_INSERT, false);
-motor drive_rb = motor(PORT15, DRIVE_INSERT, false);
-motor drive_lf = motor(PORT14, DRIVE_INSERT, true);
-motor drive_lm = motor(PORT13, DRIVE_INSERT, true);
-motor drive_lb = motor(PORT12, DRIVE_INSERT, true);
-motor flywheel = motor(PORT1, FLYWHEEL_INSERT, true);
-motor roller = motor(PORT20, ROLLER_INSERT, true);
-motor intake = motor(PORT13, INTAKE_INSERT, true);
+motor drive_rf = motor(PORT1, DRIVE_INSERT, false);
+motor drive_rm = motor(PORT2, DRIVE_INSERT, false);
+motor drive_rb = motor(PORT3, DRIVE_INSERT, false);
+motor drive_lf = motor(PORT4, DRIVE_INSERT, true);
+motor drive_lm = motor(PORT5, DRIVE_INSERT, true);
+motor drive_lb = motor(PORT6, DRIVE_INSERT, true);
+motor roller = motor(PORT19, ROLLER_INSERT, true);
+motor flywheel = motor(PORT20, FLYWHEEL_INSERT, true);
 digital_out expansion = digital_out(PORTA);
 digital_out indexer = digital_out(PORTH);
 
