@@ -22,6 +22,10 @@
 #define OSA_REV 4
 #define TSA_REV 5
 
+// Flywheel speeds
+#define LOW 8.5
+#define HIGH 9.5
+
 // Misc - defines
 #define CHAR_HI 20
 
@@ -32,5 +36,7 @@ extern float drive_speed;
 
 // Autonomous
 extern int auton_mode;
+
+// Selection
 extern const char *control_types[6];
 extern const char *auton_types[4];

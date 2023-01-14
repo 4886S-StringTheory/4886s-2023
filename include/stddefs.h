@@ -9,14 +9,14 @@
 #define SPD_INSERT gearSetting::ratio18_1
 #define TRB_INSERT gearSetting::ratio6_1
 
-#define STICK_TRQ (100.0 / 127.0)
-#define STICK_SPD (2 * 100.0 / 127.0)
-#define STICK_TRB (3 * 100.0 / 127.0)
-#define STICK_PCT (100.0 / 127.0)
-#define BTN_TRQ 100.0
-#define BTN_SPD 200.0
-#define BTN_TRB 600.0
-#define BTN_PCT 100.0
+#define STICK__TRQ (100.0 / 127.0)
+#define STICK__SPD (2 * 100.0 / 127.0)
+#define STICK__TRB (3 * 100.0 / 127.0)
+#define STICK__PCT (100.0 / 127.0)
+#define BTN__TRQ 100.0
+#define BTN__SPD 200.0
+#define BTN__TRB 600.0
+#define BTN__PCT 100.0
 
 #define GEAR_12 12.0
 #define GEAR_36 36.0
@@ -43,13 +43,13 @@
 #define TRACT_WHEEL_CIRC 10.2
 
 // Unit Conversions
-#define FULL_ROT_DEG 360.0
-#define HALF_ROT_DEG 180.0
-#define QRTR_ROT_DEG 90.0
+#define FULL_ROT__DEG 360.0
+#define HALF_ROT__DEG 180.0
+#define QRTR_ROT__DEG 90.0
 
-#define IN_CM 2.54
-#define RAD_DEG 57.29578
-#define SEC_MSEC 1000.0
+#define IN__CM 2.54
+#define RAD__DEG 57.29578
+#define SEC__MSEC 1000.0
 
 // Controller Parts
 // for use with controller named 'master'
@@ -81,8 +81,8 @@
 #define B_SCRN Brain.Screen
 #define B_SCRN_WIDTH 480
 #define B_SCRN_HEIGHT 272
-#define B_SCRN_XMID (B_SCRN_WIDTH / 2)
-#define B_SCRN_YMID (B_SCRN_HEIGHT / 2)
+#define B_SCRN_X_MID (B_SCRN_WIDTH / 2)
+#define B_SCRN_Y_MID (B_SCRN_HEIGHT / 2)
 
 // Sensor Values
 // for use with inertial sensor named 'inrtl' and vision sensor names 'vis'
@@ -105,18 +105,20 @@
 // Shorthand parameters
 #define DIR_FWD directionType::fwd
 #define DIR_REV directionType::rev
-#define VEL_PCT velocityUnits::pct
-#define VEL_RPM velocityUnits::rpm
-#define VEL_DPS velocityUnits::dps
+#define PCT_PCT percentUnits::pct
 #define ROT_DEG rotationUnits::deg
 #define ROT_REV rotationUnits::rev
 #define ROT_RAW rotationUnits::raw
-#define PCT_PCT percentUnits::pct
 #define TRQ_NM torqueUnits::Nm
 #define TRQ_INLB torqueUnits::InLb
 #define TIME_SEC timeUnits::sec
 #define TIME_MSEC timeUnits::msec
 #define TMP_C temperatureUnits::celsius
 #define TMP_F temperatureUnits::fahrenheit
+#define VEL_PCT velocityUnits::pct
+#define VEL_RPM velocityUnits::rpm
+#define VEL_DPS velocityUnits::dps
+#define VLT_VLT voltageUnits::volt
+#define VLT_MVLT voltageUnits::mV
 
 #endif // _STDDEFS_H_
