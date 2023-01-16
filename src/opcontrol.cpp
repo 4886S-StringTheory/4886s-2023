@@ -50,7 +50,7 @@ void opcontrol(void) {
     }
 
     // Fire
-    indexer.set(BTN_L1.PRESSED);
+    indexer.set(BTN_L1.pressing());
 
     // Expansion
     if (BTN_Y.pressing()) expansion.set(1);

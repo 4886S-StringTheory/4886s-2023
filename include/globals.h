@@ -1,6 +1,6 @@
 // Gearings
 #define DRIVE_GEARING (GEAR_48 / GEAR_72)
-#define DRIVE_REV_IN (DRIVE_GEARING * PI * TRACT_WHEEL_DIAM)
+#define DRIVE_REV__IN (DRIVE_GEARING * PI * TRACT_WHEEL_DIAM)
 
 // Motor inserts
 #define DRIVE_INSERT TRB_INSERT
@@ -13,6 +13,7 @@
 #define HALF_AWP_L 1
 #define HALF_AWP_R 2
 #define ROLLER 3
+#define SKILLS 4
 
 // Control modes
 #define TNK_STD 0
