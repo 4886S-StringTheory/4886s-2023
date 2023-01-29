@@ -3,6 +3,8 @@
 void opcontrol(void) {
   int fly_speed = 0;
   float flywheel_speeds[2] = {LOW, HIGH};
+  float fly_vlt;
+  float prev_fly_vel = FLY_VEL;
   sands_of_time.reset();
 
   while (true) {
@@ -37,16 +39,21 @@ void opcontrol(void) {
     // Roller
     roller.spin(DIR_FWD, (BTN_R2.pressing() - BTN_R1.pressing()) * BTN__PCT, VEL_PCT);
 
-    // Rev flywheel
-    if (BTN_L2.pressing()) flywheel.spin(fwd, flywheel_speeds[fly_speed], VLT_VLT);
-    else flywheel.spin(fwd, 5, volt);
+    // Flywheel
+    if (FLY_VEL < flywheel_speeds[fly_speed] && BTN_L2.pressing()) fly_vlt = 12;
+    else if (BTN_L2.pressing()) fly_vlt = 7.2;
+    else fly_vlt = 5;
+
+    flywheel.spin(DIR_FWD, fly_vlt, VLT_VLT);
+
+    if (FLY_VEL >= flywheel_speeds[fly_speed]) master.rumble(".");
 
     // Change flywheel speed
     if (BTN_DOWN.PRESSED) {
       fly_speed++;
       if (fly_speed > 1) fly_speed = 0;
-      if (fly_speed == 0) master.rumble(".");
-      else master.rumble("..");
+      if (fly_speed == 0) master.rumble("-");
+      else master.rumble("--");
     }
 
     // Fire

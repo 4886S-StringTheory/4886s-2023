@@ -5,8 +5,7 @@
 // Motor inserts
 #define DRIVE_INSERT TRB_INSERT
 #define FLYWHEEL_INSERT TRB_INSERT
-#define INTAKE_INSERT SPD_INSERT
-#define ROLLER_INSERT SPD_INSERT
+#define ROLLER_INSERT TRB_INSERT
 
 // Autonmous modes
 #define AWP 0
@@ -24,11 +23,14 @@
 #define TSA_REV 5
 
 // Flywheel speeds
-#define LOW 8.5
-#define HIGH 9.5
+#define LOW 2580
+#define HIGH 2950
 
 // Misc - defines
 #define CHAR_HI 20
+#define FLY_DEADBAND 20
+#define FLY_VEL (flywheel.velocity(VEL_RPM) * 6)
+#define DRIVE_VEL ((drive_r.velocity(VEL_RPM) + drive_l.velocity(VEL_RPM)) / 2)
 
 // Control
 #define SENSITIVITY 0.75

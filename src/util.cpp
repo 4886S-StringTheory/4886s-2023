@@ -1,9 +1,11 @@
 #include "../include/main.h"
 
-void pid_move(float dist, float max_vel, float accel_rate = 24, bool decel = true) {
-    // Initialize variables
-    float vel = (drive_r.velocity(VEL_RPM) + drive_l.velocity(VEL_RPM)) / 2;
-    float target_vel = vel;
+bool within_range(double value, double base, double range) {
+    return ((value <= base + range) && (value >= base - range));
+}
+
+void pid_move(float inches, float max_in_per_sec, float in_per_sec_sec = 24, bool do_decel = true) {
+    float target_vel = DRIVE_VEL;
     float pos = (drive_r.position(ROT_REV) * DRIVE_REV__IN + drive_l.position(ROT_REV) * DRIVE_REV__IN) / 2;
     float target_pos = pos;
     float start_pos = pos;
@@ -12,19 +14,19 @@ void pid_move(float dist, float max_vel, float accel_rate = 24, bool decel = tru
     float prev_error = error;
     float sum = 0;
     float deriv;
-
+    
     float kP = 1;
     float kI = 1;
-    float kD = 1;
+    float kD = 1; 
 
     float output;
 
-    while (pos <= start_pos + dist) {
+    while (pos <= start_pos + inches) {
 
         // Accelerate
-        if (target_vel < max_vel) {
-            target_vel += accel_rate / 50; // divide by 50 because 50 Hz
-            if (target_vel > max_vel) target_vel = max_vel;
+        if (target_vel < max_in_per_sec) {
+            target_vel += in_per_sec_sec / 50; // divide by 50 because 50 Hz
+            if (target_vel > max_in_per_sec) target_vel = max_in_per_sec;
         }
         
         // PID
@@ -38,8 +40,7 @@ void pid_move(float dist, float max_vel, float accel_rate = 24, bool decel = tru
         drive_l.spin(DIR_FWD, output, VLT_VLT);
         drive_r.spin(DIR_FWD, output, VLT_VLT);
 
-
-        wait (20, msec); // 50 Hz
+        wait(20, msec); // 50 Hz
     }
 }
 
