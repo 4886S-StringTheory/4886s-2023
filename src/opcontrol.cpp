@@ -5,6 +5,11 @@ void opcontrol(void) {
   float flywheel_speeds[2] = {LOW, HIGH};
   float fly_vlt;
   float prev_fly_vel = FLY_VEL;
+
+  // better buzz
+  bool reved = false;
+  bool ready_to_rumble = true;
+
   sands_of_time.reset();
 
   while (true) {
@@ -37,7 +42,7 @@ void opcontrol(void) {
     }
 
     // Roller
-    roller.spin(DIR_FWD, (BTN_R2.pressing() - BTN_R1.pressing()) * BTN__PCT, VEL_PCT);
+    roller.spin(DIR_FWD, (BTN_R2.pressing() * .3 - BTN_R1.pressing()) * BTN__PCT, VEL_PCT);
 
     // Flywheel
     if (FLY_VEL < flywheel_speeds[fly_speed] && BTN_L2.pressing()) fly_vlt = 12;
@@ -46,7 +51,15 @@ void opcontrol(void) {
 
     flywheel.spin(DIR_FWD, fly_vlt, VLT_VLT);
 
-    if (FLY_VEL >= flywheel_speeds[fly_speed]) master.rumble(".");
+    if (FLY_VEL >= flywheel_speeds[fly_speed] && BTN_L2.pressing()) master.rumble(".");
+
+    // if (within_range(FLY_VEL, flywheel_speeds[fly_speed], 25)) {
+    //   if (ready_to_rumble) {
+    //     ready_to_rumble = false;
+    //     master.rumble("...");
+    //   }
+    // }
+    // else ready_to_rumble = true;
 
     // Change flywheel speed
     if (BTN_DOWN.PRESSED) {
@@ -68,8 +81,8 @@ void opcontrol(void) {
     wait(20, msec);
 
     // Break and enter testing mode
-    if (b_scrn_vrtside() == 1 && b_scrn_hrzside() == 0) {
-        debug_test();
+    if (b_scrn_vrtside() == DOWN && b_scrn_hrzside() == LEFT) {
+        debug();
         break;
     }
   }

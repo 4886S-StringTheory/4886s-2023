@@ -14,7 +14,7 @@ void autonomous(void) {
     case ROLLER:
       drive_l.spinFor(DIR_FWD, -2 / DRIVE_REV__IN, ROT_REV, false);
       drive_r.spinFor(DIR_FWD, -2 / DRIVE_REV__IN, ROT_REV, true);
-      roller.spinFor(DIR_FWD, .35, rev, true);
+      roller.spinFor(DIR_FWD, .5, rev, true);
       break;
     case SKILLS:
       sands_of_time.reset();

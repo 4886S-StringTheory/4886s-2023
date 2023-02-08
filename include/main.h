@@ -13,9 +13,9 @@
 #include "stddefs.h"
 #include "globals.h"
 #include "util.h"
+#include "debug.h"
 
 // Main function declarations
 void pre_auton(void);
 void autonomous(void);
 void opcontrol(void);
-void debug_test(void);

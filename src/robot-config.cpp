@@ -12,8 +12,9 @@ motor drive_rf = motor(PORT1, DRIVE_INSERT, false);
 motor drive_rb = motor(PORT2, DRIVE_INSERT, false);
 motor drive_lf = motor(PORT3, DRIVE_INSERT, true);
 motor drive_lb = motor(PORT4, DRIVE_INSERT, true);
-motor roller = motor(PORT19, ROLLER_INSERT, true);
-motor flywheel = motor(PORT20, FLYWHEEL_INSERT, true);
+motor roller = motor(PORT16, ROLLER_INSERT, true);
+motor flywheel_top = motor(PORT19, FLYWHEEL_INSERT, true);
+motor flywheel_low = motor(PORT18, FLYWHEEL_INSERT, false);
 digital_out expansion = digital_out(PORTA);
 digital_out indexer = digital_out(PORTB);
 
@@ -26,12 +27,14 @@ vision::signature FRONT_BLUE_GOAL = vision::signature(0, 0, 0, 0, 0, 0, 0, 0, 0)
 vision::signature FRONT_DISC = vision::signature(0, 0, 0, 0, 0, 0, 0, 0, 0);
 
 // Sensors
-inertial inrtl = inertial(PORT18);
+inertial inrtl = inertial(PORT17);
+rotation fly_rot = rotation(PORT10);
 vision rear_optics = vision(PORT11, 0, REAR_RED_GOAL, REAR_BLUE_GOAL, REAR_DISC);
 vision front_optics = vision(PORT12, 0, FRONT_RED_GOAL, FRONT_BLUE_GOAL, FRONT_DISC);
 
 // Motor groups
 motor_group drive_r (drive_rf, drive_rb);
 motor_group drive_l (drive_lf, drive_lb);
+motor_group flywheel (flywheel_top, flywheel_low);
 
 timer sands_of_time;

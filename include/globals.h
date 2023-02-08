@@ -23,14 +23,20 @@
 #define TSA_REV 5
 
 // Flywheel speeds
-#define LOW 2580
+#define LOW 2330
 #define HIGH 2950
 
 // Misc - defines
 #define CHAR_HI 20
-#define FLY_DEADBAND 20
-#define FLY_VEL (flywheel.velocity(VEL_RPM) * 6)
+#define FLY_DEADBAND `xx
+#define FLY_VEL fly_rot.velocity(VEL_RPM)
 #define DRIVE_VEL ((drive_r.velocity(VEL_RPM) + drive_l.velocity(VEL_RPM)) / 2)
+#define DRIVE_POS ((drive_r.position(ROT_REV) * DRIVE_REV__IN + drive_l.position(ROT_REV) * DRIVE_REV__IN) / 2)
+
+#define LEFT 0
+#define UP 0
+#define RIGHT 1
+#define DOWN 1
 
 // Control
 #define SENSITIVITY 0.75
