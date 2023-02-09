@@ -26,17 +26,20 @@
 #define LOW 2330
 #define HIGH 2950
 
+// Brain
+#define X 0
+#define Y 1
+#define LEFT 1
+#define UP 1
+#define RIGHT 2
+#define DOWN 2
+
 // Misc - defines
 #define CHAR_HI 20
 #define FLY_DEADBAND `xx
 #define FLY_VEL fly_rot.velocity(VEL_RPM)
 #define DRIVE_VEL ((drive_r.velocity(VEL_RPM) + drive_l.velocity(VEL_RPM)) / 2)
 #define DRIVE_POS ((drive_r.position(ROT_REV) * DRIVE_REV__IN + drive_l.position(ROT_REV) * DRIVE_REV__IN) / 2)
-
-#define LEFT 0
-#define UP 0
-#define RIGHT 1
-#define DOWN 1
 
 // Control
 #define SENSITIVITY 0.75

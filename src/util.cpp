@@ -66,14 +66,22 @@ float stop_dist(float current_vel, float accel, float target_vel = 0) {     // 4
 
 // returns 0 for left, 1 for right, 2 for neither
 int b_scrn_hrzside(void) {
-    if (!B_SCRN.pressing()) return 2;
+    if (!B_SCRN.pressing()) return 0;
     if (B_SCRN.xPosition() < B_SCRN_X_MID) return LEFT;
     return RIGHT;
 }
 
 // returns 0 for top, 1 for bottom, 2 for neither
 int b_scrn_vrtside(void) {
-    if (!B_SCRN.pressing()) return 2;
+    if (!B_SCRN.pressing()) return 0;
     if (B_SCRN.yPosition() < B_SCRN_Y_MID) return UP;
     return DOWN;
+}
+
+int *side_pressed(void) {
+    static int sides[2];
+    sides[X] = b_scrn_hrzside();
+    sides[Y] = b_scrn_vrtside();
+
+    return sides;
 }

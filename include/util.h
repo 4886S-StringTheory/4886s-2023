@@ -7,4 +7,4 @@ float stop_dist(float current_vel, float accel, float target_vel);
 
 int b_scrn_hrzside(void);
 int b_scrn_vrtside(void);
-int b_scrn_side(char *argv);
+int *side_pressed(void);
