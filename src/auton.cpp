@@ -12,32 +12,29 @@ void autonomous(void) {
       //tmp
       break;
     case ROLLER:
-      drive_l.spinFor(DIR_FWD, -2 / DRIVE_REV__IN, ROT_REV, false);
-      drive_r.spinFor(DIR_FWD, -2 / DRIVE_REV__IN, ROT_REV, true);
-      roller.spinFor(DIR_FWD, .5, rev, true);
+      master.rumble(".");
+      drive_straight(-2, 10, 24);
+      roller.spinFor(DIR_FWD, .35, ROT_REV, true);
       break;
     case SKILLS:
       sands_of_time.reset();
-      drive_l.spinFor(DIR_FWD, -2 / DRIVE_REV__IN, ROT_REV, false);
-      drive_r.spinFor(DIR_FWD, -2 / DRIVE_REV__IN, ROT_REV, true);
-      roller.spinFor(DIR_FWD, .75, rev, true);
-      drive_l.spinFor(DIR_FWD, 3 / DRIVE_REV__IN, ROT_REV, false);
-      drive_r.spinFor(DIR_FWD, 3 / DRIVE_REV__IN, ROT_REV, true);
-      drive_r.spinFor(DIR_FWD, 0.53, ROT_REV, true);
-      flywheel.spin(DIR_FWD, 10.78, VLT_VLT);
-      wait(4000, msec);
-      indexer.set(1);
-      wait(500, msec);
-      indexer.set(0);
-      wait(2000, msec);
-      indexer.set(1);
-      wait(500, msec);
-      
-      drive_l.spinFor(DIR_FWD, 5 / DRIVE_REV__IN, ROT_REV, false);
-      drive_r.spinFor(DIR_FWD, 5 / DRIVE_REV__IN, ROT_REV, true);
 
-      drive_l.spinFor(DIR_FWD, 2, ROT_REV, true);
-      wait(2000, msec);
-      expansion.set(1);
+      // Shoot first 9
+      flywheel.spin(DIR_FWD, HOPPER_VLT, VLT_VLT);
+      wait(1200, msec);
+      for (int i = 0; i < 9; i++) {
+        indexer.set(1);
+        flywheel.spin(DIR_FWD, 12, VLT_VLT);
+        wait(300, msec);
+        indexer.set(0);
+        flywheel.spin(DIR_FWD, HOPPER_VLT, VLT_VLT);
+        wait(300, msec);
+      }
+      flywheel.stop(brakeType::coast);
+
+      // Hit rollers
+      drive_turn(PI / 2, 18.5, 24, 24, false);
+      drive_straight(-48, 48, 24);  
+      break;
   }
 }
