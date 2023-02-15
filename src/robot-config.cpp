@@ -12,7 +12,8 @@ motor drive_rf = motor(PORT1, DRIVE_INSERT, false);
 motor drive_rb = motor(PORT2, DRIVE_INSERT, false);
 motor drive_lf = motor(PORT3, DRIVE_INSERT, true);
 motor drive_lb = motor(PORT4, DRIVE_INSERT, true);
-motor roller = motor(PORT16, ROLLER_INSERT, true);
+motor roller_r = motor(PORT16, ROLLER_INSERT, true);
+motor roller_l = motor(PORT15, ROLLER_INSERT, false);
 motor flywheel_top = motor(PORT19, FLYWHEEL_INSERT, true);
 motor flywheel_low = motor(PORT18, FLYWHEEL_INSERT, false);
 digital_out expansion = digital_out(PORTA);
@@ -36,5 +37,6 @@ vision front_optics = vision(PORT12, 0, FRONT_RED_GOAL, FRONT_BLUE_GOAL, FRONT_D
 motor_group drive_r (drive_rf, drive_rb);
 motor_group drive_l (drive_lf, drive_lb);
 motor_group flywheel (flywheel_top, flywheel_low);
+motor_group roller (roller_r, roller_l);
 
 timer sands_of_time;

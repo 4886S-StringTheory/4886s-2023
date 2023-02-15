@@ -1,11 +1,14 @@
-// Gearings
+// Physical bits
 #define DRIVE_GEARING (GEAR_48 / GEAR_72)
 #define DRIVE_REV__IN (DRIVE_GEARING * PI * TRACT_WHEEL_DIAM)
+#define WHEEL_TO_WHEEL_DIST 12
 
-// Motor inserts
+#define DRIVE_KP 0.5
+#define DIR_KP 0.1
+
 #define DRIVE_INSERT TRB_INSERT
 #define FLYWHEEL_INSERT TRB_INSERT
-#define ROLLER_INSERT TRB_INSERT
+#define ROLLER_INSERT SPD_INSERT
 
 // Autonmous modes
 #define AWP 0
@@ -23,7 +26,7 @@
 #define TSA_REV 5
 
 // Flywheel speeds
-#define LOW 2330
+#define LOW 2250
 #define HIGH 2950
 
 // Brain
@@ -34,20 +37,24 @@
 #define RIGHT 2
 #define DOWN 2
 
+// Auton consts
+#define HOPPER_VLT 8
+
 // Misc - defines
 #define CHAR_HI 20
-#define FLY_DEADBAND `xx
+#define CHAR_WI 12
 #define FLY_VEL fly_rot.velocity(VEL_RPM)
 #define DRIVE_VEL ((drive_r.velocity(VEL_RPM) + drive_l.velocity(VEL_RPM)) / 2)
 #define DRIVE_POS ((drive_r.position(ROT_REV) * DRIVE_REV__IN + drive_l.position(ROT_REV) * DRIVE_REV__IN) / 2)
 
 // Control
-#define SENSITIVITY 0.75
+#define SENSITIVITY 0.7
 extern int control_mode;
 extern float drive_speed;
 
 // Autonomous
 extern int auton_mode;
+extern float current_heading;
 
 // Selection
 extern const char *control_types[6];

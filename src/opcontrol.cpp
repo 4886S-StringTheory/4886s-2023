@@ -42,11 +42,11 @@ void opcontrol(void) {
     }
 
     // Roller
-    roller.spin(DIR_FWD, (BTN_R2.pressing() * .3 - BTN_R1.pressing()) * BTN__PCT, VEL_PCT);
+    roller.spin(DIR_FWD, (BTN_R2.pressing() - BTN_R1.pressing()) * BTN__PCT, VEL_PCT);
 
     // Flywheel
     if (FLY_VEL < flywheel_speeds[fly_speed] && BTN_L2.pressing()) fly_vlt = 12;
-    else if (BTN_L2.pressing()) fly_vlt = 7.2;
+    else if (BTN_L2.pressing()) fly_vlt = 8.5;
     else fly_vlt = 5;
 
     flywheel.spin(DIR_FWD, fly_vlt, VLT_VLT);
@@ -80,10 +80,11 @@ void opcontrol(void) {
 
     wait(20, msec);
 
-    // Break and enter testing mode
+    // Enter testing mode
     if (b_scrn_vrtside() == DOWN && b_scrn_hrzside() == LEFT) {
         debug();
-        break;
     }
+
+    if (side_pressed()[X] == RIGHT && side_pressed()[Y] == DOWN) measure_char();
   }
 }

@@ -14,7 +14,8 @@ extern motor drive_lb;
 extern motor flywheel_top;
 extern motor flywheel_low;
 extern motor intake;
-extern motor roller;
+extern motor roller_r;
+extern motor roller_l;
 extern digital_out expansion;
 extern digital_out indexer;
 extern rotation fly_rot;
@@ -36,5 +37,6 @@ extern vision front_optics;
 extern motor_group drive_r;
 extern motor_group drive_l;
 extern motor_group flywheel;
+extern motor_group roller;
 
 extern timer sands_of_time;

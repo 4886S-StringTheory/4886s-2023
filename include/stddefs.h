@@ -47,6 +47,8 @@
 #define HALF_ROT__DEG 180.0
 #define QRTR_ROT__DEG 90.0
 
+#define RAD__DEG 57.29578
+
 #define IN__CM 2.54
 #define RAD__DEG 57.29578
 #define SEC__MSEC 1000.0
@@ -79,10 +81,10 @@
 // for use with brain named 'Brain'
 #define BATTERY Brain.Battery
 #define B_SCRN Brain.Screen
-#define B_SCRN_WIDTH 480
-#define B_SCRN_HEIGHT 272
-#define B_SCRN_X_MID (B_SCRN_WIDTH / 2)
-#define B_SCRN_Y_MID (B_SCRN_HEIGHT / 2)
+#define B_SCRN_X 480
+#define B_SCRN_Y 272
+#define B_SCRN_X_MID (B_SCRN_X / 2)
+#define B_SCRN_Y_MID (B_SCRN_Y / 2)
 
 // Sensor Values
 // for use with inertial sensor named 'inrtl' and vision sensor names 'vis'
