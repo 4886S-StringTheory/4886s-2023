@@ -6,6 +6,9 @@ void opcontrol(void) {
   float fly_vlt;
   float prev_fly_vel = FLY_VEL;
 
+  float drive_speeds[2] = {SLOW, FAST};
+  int dspeed_select = 0;
+
   // better buzz
   bool reved = false;
   bool ready_to_rumble = true;
@@ -24,8 +27,8 @@ void opcontrol(void) {
         drive_l.spin(DIR_FWD, (LEFT_STICK_Y + LEFT_STICK_X * SENSITIVITY) * drive_speed * STICK__PCT, VEL_PCT);
         break;
       case TSA_STD: //def
-        drive_r.spin(DIR_FWD, (LEFT_STICK_Y - RIGHT_STICK_X * SENSITIVITY) * drive_speed * STICK__PCT, VEL_PCT);
-        drive_l.spin(DIR_FWD, (LEFT_STICK_Y + RIGHT_STICK_X * SENSITIVITY) * drive_speed * STICK__PCT, VEL_PCT);
+        drive_r.spin(DIR_FWD, (LEFT_STICK_Y - RIGHT_STICK_X * SENSITIVITY * drive_speed) * drive_speed * STICK__PCT, VEL_PCT);
+        drive_l.spin(DIR_FWD, (LEFT_STICK_Y + RIGHT_STICK_X * SENSITIVITY * drive_speed) * drive_speed * STICK__PCT, VEL_PCT);
         break;
       case TNK_REV:
         drive_l.spin(DIR_REV, RIGHT_STICK_Y * drive_speed * STICK__PCT, VEL_PCT);
@@ -69,6 +72,12 @@ void opcontrol(void) {
       else master.rumble("--");
     }
 
+    if (BTN_RIGHT.PRESSED) {
+      dspeed_select++;
+      if (dspeed_select > 1) dspeed_select = 0;
+      drive_speed = drive_speeds[dspeed_select];
+    }
+
     // Fire
     indexer.set(BTN_L1.pressing());
 
@@ -79,12 +88,5 @@ void opcontrol(void) {
     if (sands_of_time.time(sec) > 85 && sands_of_time.time(sec) < 85.2) master.rumble("....");
 
     wait(20, msec);
-
-    // Enter testing mode
-    if (b_scrn_vrtside() == DOWN && b_scrn_hrzside() == LEFT) {
-        debug();
-    }
-
-    if (side_pressed()[X] == RIGHT && side_pressed()[Y] == DOWN) measure_char();
   }
 }

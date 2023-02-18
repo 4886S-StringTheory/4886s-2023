@@ -172,7 +172,8 @@ void drive_straight(float dist, float maxVel, float accel) {
 
         }
     }
-
+    drive_r.stop(brakeType::coast);
+    drive_l.stop(brakeType::coast);
 }
 
 void drive_turn(float radians, float outerRadius, float maxVel, float accel, bool reversed) {
@@ -186,30 +187,33 @@ void drive_turn(float radians, float outerRadius, float maxVel, float accel, boo
     float pos = 0;
     float currLeft;
     float currRight;
-    float LeftPosStart = drive_l.position(turns);
-    float RightPosStart = drive_r.position(turns);
-    int tickSpeed = 20;
+    float LeftPosStart = drive_l.position(ROT_REV);
+    float RightPosStart = drive_r.position(ROT_REV);
+    float tickSpeed = 20.0;
     int currentTimer = sands_of_time.time(msec);
-    int ticksPerSec = (1000 / tickSpeed);
+    float ticksPerSec = (1000 / tickSpeed);
 
     float l_dist_traveled;
     float r_dist_traveled;
+    float rad_remaining;
     float r_pos_err;
     float l_pos_err;
 
-    if (radians > 0 / RAD__DEG) { // turning right
+    if (radians > inrtl.rotation(degrees) / RAD__DEG) { // turning right
+    printf("right\n");
         while (vel >= 0) {
             l_dist_traveled = drive_l.position(ROT_REV) - LeftPosStart;
             r_dist_traveled = drive_r.position(ROT_REV) - RightPosStart;
+            rad_remaining = radians - inrtl.rotation(degrees) / RAD__DEG;
 
-            angleLeft = (radians - inrtl.rotation(degrees) / RAD__DEG) - 0.1 * inrtl.gyroRate(zaxis, dps) / RAD__DEG; // no idea
+            angleLeft = rad_remaining;// - 0.1 * inrtl.gyroRate(zaxis, dps) / RAD__DEG; // correction for gyro inaccuracies?
             currLeft = l_dist_traveled * DRIVE_REV__IN;
             currRight = r_dist_traveled * DRIVE_REV__IN; /// this converts the code into inches
 
             if (stop_dist(vel, accel) >= angleLeft * outerRadius) {
-                vel -= accel / ticksPerSec; // decel
+                vel -= (float)accel / ticksPerSec; // decel
             } else if (vel < maxVel) {
-                vel += accel / ticksPerSec;
+                vel += (float)accel / ticksPerSec;
             } else {
                 vel = maxVel;
             }
@@ -219,13 +223,11 @@ void drive_turn(float radians, float outerRadius, float maxVel, float accel, boo
                 break;
             }
 
-            r_pos_err = pos - currRight;
-            l_pos_err = pos = currLeft;
             vel_rpm = vel / DRIVE_REV__IN * 60;
 
             if (!reversed) {
                 drive_r.spin(DIR_FWD, DRIVE_KP * (pos * radiusRatio - currRight) + vel_rpm, VEL_RPM);
-                drive_l.spin(DIR_FWD, DRIVE_KP * l_pos_err + vel_rpm * radiusRatio, VEL_RPM);
+                drive_l.spin(DIR_FWD, DRIVE_KP * (pos - currLeft) + vel_rpm * radiusRatio, VEL_RPM);
             }
             else {
                 drive_r.spin(DIR_FWD, -DRIVE_KP * (pos + currRight) - vel_rpm, VEL_RPM);
@@ -240,19 +242,23 @@ void drive_turn(float radians, float outerRadius, float maxVel, float accel, boo
         }
     }
     else if (radians < inrtl.rotation(degrees) / RAD__DEG) {
+        printf("left\n");
         while (vel >= 0) {
+            printf("radians: %.2f\n", radians);
+            printf("angle: %.2f\n", inrtl.rotation(ROT_DEG) / RAD__DEG);
             l_dist_traveled = drive_l.position(ROT_REV) - LeftPosStart;
             r_dist_traveled = drive_r.position(ROT_REV) - RightPosStart;
+            rad_remaining = radians - inrtl.rotation(ROT_DEG) / RAD__DEG;
 
             currLeft = (l_dist_traveled) * DRIVE_REV__IN;
             currRight = (r_dist_traveled) * DRIVE_REV__IN; /// this converts the code into inches
 
-            angleLeft =  -(radians - (inrtl.rotation(degrees)) / RAD__DEG) + 0.1 * inrtl.gyroRate(zaxis, dps) / RAD__DEG;
+            angleLeft =  -rad_remaining;// + 0.1 * inrtl.gyroRate(zaxis, dps) / RAD__DEG; // correctio for inrtl inaccuracies?
 
             if (angleLeft * outerRadius <= stop_dist(vel, accel)) {
                 vel -= (float)accel / ticksPerSec; // decel
             } else if (vel < maxVel) {
-                vel += accel  / ticksPerSec;
+                vel += (float)accel  / ticksPerSec;
             } else {
                 vel = maxVel;
             }
@@ -277,6 +283,7 @@ void drive_turn(float radians, float outerRadius, float maxVel, float accel, boo
             }
         }
     }
+    printf("exit drive_turn");
     drive_l.stop(brakeType::coast);
     drive_r.stop(brakeType::coast);
     current_heading = radians * RAD__DEG;
@@ -293,24 +300,19 @@ float stop_dist(float current_vel, float accel, float target_vel) {     // 4886T
   // = (targetVel^2 - currentVel^2)/2*accel
 }
 
-// returns 0 for left, 1 for right, 2 for neither
-int b_scrn_hrzside(void) {
-    if (!B_SCRN.pressing()) return 0;
-    if (B_SCRN.xPosition() < B_SCRN_X_MID) return LEFT;
-    return RIGHT;
-}
-
-// returns 0 for top, 1 for bottom, 2 for neither
-int b_scrn_vrtside(void) {
-    if (!B_SCRN.pressing()) return 0;
-    if (B_SCRN.yPosition() < B_SCRN_Y_MID) return UP;
-    return DOWN;
-}
-
 int *side_pressed(void) {
     static int sides[2];
-    sides[X] = b_scrn_hrzside();
-    sides[Y] = b_scrn_vrtside();
+    if (!B_SCRN.PRESSED) {
+        sides[0] = 0;
+        sides[1] = 0;
+        return sides;
+    }
+
+    if (B_SCRN.xPosition() < B_SCRN_X_MID) sides[X] = LEFT;
+    else sides[X] = RIGHT;
+
+    if (B_SCRN.yPosition() < B_SCRN_Y_MID) sides[Y] = UP;
+    else sides[Y] = DOWN;
 
     return sides;
 }

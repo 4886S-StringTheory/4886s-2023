@@ -28,7 +28,7 @@ void debug(void) {
         }
 
         // Back to opcontrol
-        if (b_scrn_vrtside() == DOWN && b_scrn_hrzside() == RIGHT) {
+        if (side_pressed()[Y] == DOWN && side_pressed()[Y]== RIGHT) {
             break;
         }
 

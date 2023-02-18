@@ -26,7 +26,7 @@ void drive_straight(float dist, float maxVel, float accel);
  * @param outerRadius outer radius of turn
  * @param maxVel max velocity in in/sec of turn
  * @param accel acceleration in in/sec/sec of turn
- * @param reversed turing backwards?
+ * @param reversed turning backwards?
  */
 void drive_turn(float radians, float outerRadius, float maxVel, float accel, bool reversed);
 
@@ -34,9 +34,6 @@ void fly_pid(float rpm, char competition_state);
 
 bool within_range(double value, double base, double range);
 float stop_dist(float current_vel, float accel, float target_vel = 0);
-
-int b_scrn_hrzside(void);
-int b_scrn_vrtside(void);
 
 /**
  * @brief detects which side of the brain is pressed

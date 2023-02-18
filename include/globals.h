@@ -3,8 +3,8 @@
 #define DRIVE_REV__IN (DRIVE_GEARING * PI * TRACT_WHEEL_DIAM)
 #define WHEEL_TO_WHEEL_DIST 12
 
-#define DRIVE_KP 0.5
-#define DIR_KP 0.1
+#define DRIVE_KP 0.6
+#define DIR_KP 0.4
 
 #define DRIVE_INSERT TRB_INSERT
 #define FLYWHEEL_INSERT TRB_INSERT
@@ -25,6 +25,10 @@
 #define OSA_REV 4
 #define TSA_REV 5
 
+// Drive speeds
+#define SLOW 0.5
+#define FAST 1.0
+
 // Flywheel speeds
 #define LOW 2250
 #define HIGH 2950
@@ -38,7 +42,7 @@
 #define DOWN 2
 
 // Auton consts
-#define HOPPER_VLT 8
+#define HOPPER_VLT 8.2
 
 // Misc - defines
 #define CHAR_HI 20
@@ -46,6 +50,7 @@
 #define FLY_VEL fly_rot.velocity(VEL_RPM)
 #define DRIVE_VEL ((drive_r.velocity(VEL_RPM) + drive_l.velocity(VEL_RPM)) / 2)
 #define DRIVE_POS ((drive_r.position(ROT_REV) * DRIVE_REV__IN + drive_l.position(ROT_REV) * DRIVE_REV__IN) / 2)
+#define DEADBAND 5
 
 // Control
 #define SENSITIVITY 0.7
