@@ -39,6 +39,8 @@ void pre_auton(void) {
             break;
         }
 
+        if(BTN_A.pressing()) break;
+
         wait(20, msec);
     }
 

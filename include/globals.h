@@ -30,7 +30,7 @@
 #define FAST 1.0
 
 // Flywheel speeds
-#define LOW 2250
+#define LOW 2050
 #define HIGH 2950
 
 // Brain
@@ -42,7 +42,7 @@
 #define DOWN 2
 
 // Auton consts
-#define HOPPER_VLT 8.2
+#define HOPPER_VLT 8
 
 // Misc - defines
 #define CHAR_HI 20
