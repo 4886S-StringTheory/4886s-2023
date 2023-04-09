@@ -17,6 +17,7 @@ using namespace vex;
 competition Competition;
 
 int main() {
+  // opcontrol();
   pre_auton();
   Competition.autonomous(autonomous);
   Competition.drivercontrol(opcontrol);

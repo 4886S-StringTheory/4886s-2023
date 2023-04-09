@@ -17,7 +17,7 @@ extern motor intake;
 extern motor roller_r;
 extern motor roller_l;
 extern digital_out expansion;
-extern digital_out indexer;
+extern digital_out flap;
 extern rotation fly_rot;
 
 // Vision signatures

@@ -194,6 +194,7 @@ void tune_drive(void) {
 }
 
 void speed_control(void) {
+    /*
     int fly_rpm = 2400;
     float fly_vlt = 0;
     while (1) {
@@ -212,6 +213,7 @@ void speed_control(void) {
         B_SCRN.setCursor(1,1);
         B_SCRN.print("fly_rpm: %i", fly_rpm);
     }
+    */
 }
 
 void measure_char(void) {

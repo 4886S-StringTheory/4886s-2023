@@ -5,10 +5,12 @@
 
 #define DRIVE_KP 0.6
 #define DIR_KP 0.4
+#define FLY_KP 0.3
+#define FLY_ACCEL 18
 
 #define DRIVE_INSERT TRB_INSERT
 #define FLYWHEEL_INSERT TRB_INSERT
-#define ROLLER_INSERT SPD_INSERT
+#define ROLLER_INSERT TRB_INSERT
 
 // Autonmous modes
 #define AWP 0
@@ -30,8 +32,9 @@
 #define FAST 1.0
 
 // Flywheel speeds
-#define LOW 2050
-#define HIGH 2950
+#define IDLE 1000
+#define LOW 2200
+#define HIGH 3050
 
 // Brain
 #define X 0

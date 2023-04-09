@@ -1,17 +1,17 @@
 #include "../include/main.h"
 
 void opcontrol(void) {
-  int fly_speed = 0;
-  float flywheel_speeds[2] = {LOW, HIGH};
-  float fly_vlt;
-  float prev_fly_vel = FLY_VEL;
-
   float drive_speeds[2] = {SLOW, FAST};
   int dspeed_select = 0;
 
-  // better buzz
-  bool reved = false;
-  bool ready_to_rumble = true;
+  int fly_speed = 0;
+  float flywheel_speeds[2] = {LOW, HIGH};
+  float fly_vlt;
+
+  int fly_targ = IDLE;
+  int max_fly_vel = flywheel_speeds[fly_speed];
+
+  bool flap_up = false;
 
   sands_of_time.reset();
 
@@ -44,25 +44,39 @@ void opcontrol(void) {
         break;
     }
 
-    // Roller
-    roller.spin(DIR_FWD, (BTN_R2.pressing() - BTN_R1.pressing()) * BTN__PCT, VEL_PCT);
+    // Change drive speed
+    if (BTN_RIGHT.PRESSED) {
+      dspeed_select++;
+      if (dspeed_select > 1) dspeed_select = 0;
+      drive_speed = drive_speeds[dspeed_select];
+    }
+
+    // Intake
+    roller.spin(DIR_FWD, (BTN_L1.pressing() - BTN_R1.pressing()) * BTN__PCT, VEL_PCT);
 
     // Flywheel
     if (FLY_VEL < flywheel_speeds[fly_speed] && BTN_L2.pressing()) fly_vlt = 12;
     else if (BTN_L2.pressing()) fly_vlt = 8.5;
-    else fly_vlt = 5;
-
+    else fly_vlt = 7;
     flywheel.spin(DIR_FWD, fly_vlt, VLT_VLT);
-
+    // Buzz
     if (FLY_VEL >= flywheel_speeds[fly_speed] && BTN_L2.pressing()) master.rumble(".");
 
-    // if (within_range(FLY_VEL, flywheel_speeds[fly_speed], 25)) {
-    //   if (ready_to_rumble) {
-    //     ready_to_rumble = false;
-    //     master.rumble("...");
-    //   }
+    // //tmp
+    // if (!BTN_L2.pressing()) fly_targ = IDLE;
+    // if ((FLY_VEL < flywheel_speeds[fly_speed]) && BTN_L2.pressing()) {
+    //   fly_targ += FLY_ACCEL; // for use on 20ms cycle
     // }
-    // else ready_to_rumble = true;
+    // if (fly_targ > flywheel_speeds[fly_speed]) {
+    //   fly_targ = max_fly_vel;
+    // }
+    // fly_vlt = (fly_targ - FLY_VEL) * FLY_KP;
+    // if (fly_vlt < 0) fly_vlt = 0;
+    // flywheel.spin(DIR_FWD, fly_vlt, VLT_VLT);
+    
+    // printf("fly_vlt: %.2f\n", fly_vlt);
+    // printf("FLY_VEL: %.2lf\n", FLY_VEL);
+    // printf("fly_trg: %i\n\n", fly_targ);
 
     // Change flywheel speed
     if (BTN_DOWN.PRESSED) {
@@ -72,14 +86,11 @@ void opcontrol(void) {
       else master.rumble("--");
     }
 
-    if (BTN_RIGHT.PRESSED) {
-      dspeed_select++;
-      if (dspeed_select > 1) dspeed_select = 0;
-      drive_speed = drive_speeds[dspeed_select];
+    // Flap
+    if (BTN_R2.PRESSED) {
+      flap.set(flap_up);
+      flap_up = !flap_up;
     }
-
-    // Fire
-    indexer.set(BTN_L1.pressing());
 
     // Expansion
     if (BTN_Y.pressing()) expansion.set(1);

@@ -3,6 +3,7 @@
 void autonomous(void) {
   switch (auton_mode) {
     case AWP:
+    /*
       // Get roller a
       drive_straight(-2, 10, 24);
       roller.spinFor(DIR_FWD, .38, ROT_REV, true);
@@ -40,8 +41,10 @@ void autonomous(void) {
       drive_l.stop(brakeType::coast);
       drive_r.setMaxTorque(100, pct);
       drive_l.setMaxTorque(100, pct);
+      */
       break;
     case HALF_AWP_L:
+    /*
       // Get roller a
       drive_straight(-2, 10, 24);
       roller.spinFor(DIR_FWD, .38, ROT_REV, true);
@@ -62,16 +65,35 @@ void autonomous(void) {
       wait(500, msec);
       flywheel.stop(brakeType::coast);
       indexer.set(0);
+      */
       break;
     case HALF_AWP_R:
-      //tmp
+      flywheel.spin(DIR_FWD, 7, VLT_VLT);
+      // Get roller
+      drive_straight(-18, 36, 24);
+      drive_turn(-2*PI/4, WHEEL_TO_WHEEL_DIST / 2, 24, 24, true);
+      drive_straight(-6, 24, 24);
+      roller.spinFor(DIR_FWD, 2, ROT_REV);
+      // First 2 shots
+      drive_straight(6, 24, 24);
+      drive_turn(-2*PI/5, WHEEL_TO_WHEEL_DIST/2, 24, 24, true);
+      flywheel.spin(DIR_FWD, 10.2, VLT_VLT);
+      drive_straight(32, 42, 24);
+      drive_turn(-2*PI/3, WHEEL_TO_WHEEL_DIST/2, 24, 24, true);
+      roller.spinFor(DIR_FWD, -1, ROT_REV);
+      wait(500, msec);
+      roller.spinFor(DIR_FWD, -1, ROT_REV);
+      wait(500, msec);
+
       break;
     case ROLLER:
       master.rumble(".");
-      drive_straight(-2, 10, 24);
-      roller.spinFor(DIR_FWD, .35, ROT_REV, true);
+      drive_r.spinFor(DIR_FWD, -3.5 * DRIVE_GEARING / MED_OMNI_CIRC, ROT_REV, false);
+      drive_l.spinFor(DIR_FWD, -3.5 * DRIVE_GEARING / MED_OMNI_CIRC, ROT_REV, true);
+      roller.spinFor(DIR_FWD, .55 * 3, ROT_REV, 66, VEL_PCT, true);
       break;
     case SKILLS:
+    /*
      sands_of_time.reset();
 
       // Shoot first 9
@@ -164,6 +186,7 @@ void autonomous(void) {
       // Expand
       drive_straight(-8, 24, 24);
       expansion.set(1);
+      */
       break;
   }
 }

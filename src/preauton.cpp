@@ -22,7 +22,7 @@ void pre_auton(void) {
     B_SCRN.setFillColor(black);
     B_SCRN.setPenColor(white);
     B_SCRN.setCursor(B_SCRN_Y * 3 / 2, B_SCRN_X / 72);
-    B_SCRN.print("AWP");
+    B_SCRN.print("%s", autons[auton_mode]);
 
 
     while (1) {
