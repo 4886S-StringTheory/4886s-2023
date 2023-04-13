@@ -9,7 +9,7 @@ controller master;
 // All perpetrators of motion
 // Bad Ports: 13
 motor drive_rf = motor(PORT1, DRIVE_INSERT, false);
-motor drive_rb = motor(PORT2, DRIVE_INSERT, false);
+motor drive_rb = motor(PORT6, DRIVE_INSERT, false);
 motor drive_lf = motor(PORT3, DRIVE_INSERT, true);
 motor drive_lb = motor(PORT4, DRIVE_INSERT, true);
 motor roller_r = motor(PORT16, ROLLER_INSERT, false);
@@ -17,7 +17,7 @@ motor roller_l = motor(PORT15, ROLLER_INSERT, false);
 motor flywheel_top = motor(PORT19, FLYWHEEL_INSERT, false);
 motor flywheel_low = motor(PORT18, FLYWHEEL_INSERT, true);
 digital_out expansion = digital_out(PORTA);
-digital_out flap = digital_out(PORTB);
+digital_out blocker = digital_out(PORTB);
 
 // Signaures for vision
 vision::signature REAR_RED_GOAL = vision::signature(0, 0, 0, 0, 0, 0, 0, 0, 0);

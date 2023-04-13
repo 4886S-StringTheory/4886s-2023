@@ -11,7 +11,7 @@ void opcontrol(void) {
   int fly_targ = IDLE;
   int max_fly_vel = flywheel_speeds[fly_speed];
 
-  bool flap_up = false;
+  int expand_sequence = UNFIRED;
 
   sands_of_time.reset();
 
@@ -26,7 +26,7 @@ void opcontrol(void) {
         drive_r.spin(DIR_FWD, (LEFT_STICK_Y - LEFT_STICK_X * SENSITIVITY) * drive_speed * STICK__PCT, VEL_PCT);
         drive_l.spin(DIR_FWD, (LEFT_STICK_Y + LEFT_STICK_X * SENSITIVITY) * drive_speed * STICK__PCT, VEL_PCT);
         break;
-      case TSA_STD: //def
+      case TSA_STD:
         drive_r.spin(DIR_FWD, (LEFT_STICK_Y - RIGHT_STICK_X * SENSITIVITY * drive_speed) * drive_speed * STICK__PCT, VEL_PCT);
         drive_l.spin(DIR_FWD, (LEFT_STICK_Y + RIGHT_STICK_X * SENSITIVITY * drive_speed) * drive_speed * STICK__PCT, VEL_PCT);
         break;
@@ -86,13 +86,19 @@ void opcontrol(void) {
       else master.rumble("--");
     }
 
-    // Flap
-    if (BTN_R2.PRESSED) {
-      flap.set(flap_up);
-      flap_up = !flap_up;
+    // Expansion / Blocker
+
+    if (BTN_Y.PRESSED) {
+      if (expand_sequence == UNFIRED) {
+        blocker.set(1);
+        expand_sequence = BLOCKER_FIRED;
+      }
+      if (expand_sequence == BLOCKER_FIRED) {
+        expansion.set(1);
+        expand_sequence = EXPANSION_FIRED;
+      }
     }
 
-    // Expansion
     if (BTN_Y.pressing()) expansion.set(1);
 
     // Timer - buzz w/ 20s left

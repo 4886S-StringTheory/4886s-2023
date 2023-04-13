@@ -33,7 +33,7 @@
 
 // Flywheel speeds
 #define IDLE 1000
-#define LOW 2200
+#define LOW 1800
 #define HIGH 3050
 
 // Brain
@@ -54,6 +54,10 @@
 #define DRIVE_VEL ((drive_r.velocity(VEL_RPM) + drive_l.velocity(VEL_RPM)) / 2)
 #define DRIVE_POS ((drive_r.position(ROT_REV) * DRIVE_REV__IN + drive_l.position(ROT_REV) * DRIVE_REV__IN) / 2)
 #define DEADBAND 5
+#define UNFIRED 0
+#define BLOCKER_FIRED 1
+#define EXPANSION_FIRED 2
+
 
 // Control
 #define SENSITIVITY 0.7
