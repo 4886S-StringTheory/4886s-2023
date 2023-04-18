@@ -87,19 +87,8 @@ void opcontrol(void) {
     }
 
     // Expansion / Blocker
-
-    if (BTN_Y.PRESSED) {
-      if (expand_sequence == UNFIRED) {
-        blocker.set(1);
-        expand_sequence = BLOCKER_FIRED;
-      }
-      if (expand_sequence == BLOCKER_FIRED) {
-        expansion.set(1);
-        expand_sequence = EXPANSION_FIRED;
-      }
-    }
-
     if (BTN_Y.pressing()) expansion.set(1);
+    if (BTN_B.pressing()) blocker.set(1);
 
     // Timer - buzz w/ 20s left
     if (sands_of_time.time(sec) > 85 && sands_of_time.time(sec) < 85.2) master.rumble("....");
