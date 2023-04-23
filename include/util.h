@@ -28,7 +28,7 @@ void drive_straight(float dist, float maxVel, float accel);
  * @param accel acceleration in in/sec/sec of turn
  * @param reversed turning backwards?
  */
-void drive_turn(float radians, float outerRadius, float maxVel, float accel, bool reversed);
+void drive_turn(float deg, float outerRadius, float maxVel, float accel, bool reversed = true);
 
 void fly_pid(float rpm, char competition_state);
 

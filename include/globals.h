@@ -3,8 +3,8 @@
 #define DRIVE_REV__IN (DRIVE_GEARING * PI * TRACT_WHEEL_DIAM)
 #define WHEEL_TO_WHEEL_DIST 12
 
-#define DRIVE_KP 0.6
-#define DIR_KP 0.4
+#define DRIVE_KP 0.92
+#define DIR_KP 3.75
 #define FLY_KP 0.3
 #define FLY_ACCEL 18
 
@@ -48,6 +48,7 @@
 #define HOPPER_VLT 8
 
 // Misc - defines
+#define GYRO_CORRECTION (7218.70 / 7200.0)
 #define CHAR_HI 20
 #define CHAR_WI 12
 #define FLY_VEL fly_rot.velocity(VEL_RPM)

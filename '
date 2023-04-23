@@ -1,0 +1,16 @@
+#include "../include/main.h"
+
+void autonomous(void) {
+    switch (auton_mode) {
+        case AWP:
+            break;
+        case HALF_AWP_L:
+            break;
+        case HALF_AWP_R:
+            break;
+        case ROLLER:
+            break;
+        case SKILLS:
+            break;
+    }
+}

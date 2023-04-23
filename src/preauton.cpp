@@ -40,6 +40,7 @@ void pre_auton(void) {
         }
 
         if(BTN_A.pressing()) break;
+        if (BTN_Y.pressing()) debug_func();
 
         wait(20, msec);
     }
