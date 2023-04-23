@@ -5,7 +5,7 @@ int control_mode = TSA_STD;
 float drive_speed = 1.0;
 
 // Autonomous
-int auton_mode = AWP;
+int auton_mode = HALF_AWP_L;
 float current_heading = 0;
 
 // Selection
