@@ -3,91 +3,13 @@
 float pid(float setpoint, float current_value, float *sum, float *prev_error, double constants[3]) {
     float error = setpoint - current_value;
     *sum += error;
-    *sum = 0;
     float deriv = error - *prev_error;
     *prev_error = error;
 
     // Debug
-    printf("error: %.1f, kP: %.3f, integral: %.1f, kI: %.3f, deriv: %.1f, kD: %.3f\n", error, constants[0], *sum, constants[1], deriv, constants[2]);
+//    printf("error: %.1f\nkP: %.3f\nintegral: %.1f\nkI: %.3f\nderiv: %.1f\nkD: %.3f\n\n", error, constants[0], *sum, constants[1], deriv, constants[2]);
 
     return (error * constants[0]) + (*sum * constants[1]) + (deriv * constants[2]);
-}
-
-void pid_move(float dist, float max_vel, float accel, bool do_decel) {
-    float target_vel = DRIVE_VEL;
-    float target_pos = DRIVE_POS;
-    float start_pos = DRIVE_POS;
-    float start_dir = HEADING;
-
-    float sum = 0;
-    float prev_error;
-
-    // Outputs
-    float pos_out;
-    float dir_out;
-
-    double tune[4] = {.1, 0, 0, .6};
-    while (!within_range(start_pos + dist, DRIVE_POS, .25)) {
-        float dist_traveled = DRIVE_POS - start_pos;
-        float dist_to_targ = dist - dist_traveled;
-
-        /*
-        if (dist > 0) { // if moving forward
-            printf("fwd - "); //dbg
-            if (dist_to_targ <= stop_dist(target_vel, accel) && do_decel) { // check for decel
-                printf("decel\n"); //dbg
-                target_vel -= accel / 50.0;
-            }
-            else if (target_vel < max_vel) {    // check for accel
-                printf("accel\n");
-                target_vel += accel / 50.0; // divide by 50 because 50 Hz
-                if (target_vel > max_vel) target_vel = max_vel;
-            }
-        }
-        else if (dist < 0) {    // if moving backward
-            printf("rev - "); //dbg
-            if (dist_to_targ <= stop_dist(target_vel, accel) && do_decel) { // check for decel
-                printf("decel\n"); //dbg
-                target_vel += accel / 50.0;
-            }
-            else if (target_vel > -max_vel) {   // check for accel
-                printf("accel\n"); //dbg
-                target_vel -= accel / 50.0; // divide by 50 because 50 Hz
-                printf("targ_vel: %.2f\n", target_vel);
-            }
-            else target_vel = max_vel;
-        }
-        else break;
-        */
-
-        if (stop_dist(target_vel, accel) >= dist_to_targ) {
-            target_vel -= accel / 50.0;
-            if (target_vel > abs(max_vel)) target_vel = max_vel;
-        }
-        else if (stop_dist(target_vel, accel) <= dist_to_targ ) {
-            //target_vel +=
-        }
-        
-        // Find output based on expected position
-        target_pos += target_vel / 50;
-        pos_out = target_vel + (target_pos - DRIVE_POS) * tune[3];
-
-        dir_out = (start_dir - HEADING) * tune[0];
-
-        drive_l.spin(DIR_FWD, pos_out + dir_out, VLT_VLT);
-        drive_r.spin(DIR_FWD, pos_out - dir_out, VLT_VLT);
-
-        wait(20, msec); // 50 Hz
-    }
-    printf("broken\n");
-    if (do_decel) {
-        drive_l.stop(brakeType::brake);
-        drive_l.stop(brakeType::brake);
-    }
-    else {
-        drive_l.stop(brakeType::coast);
-        drive_r.stop(brakeType::coast);
-    }
 }
 
 void pid_turn(float deg, float rpm, float accel) {
@@ -115,15 +37,15 @@ void drive_straight(float dist, float maxVel, float accel) {
     if (dist > 0) {
         while (vel >= 0) {
             currLeft = (drive_l.position(ROT_REV) - LeftPosStart) *
-                        DRIVE_REV__IN;
+                DRIVE_REV__IN;
             currRight = (drive_r.position(ROT_REV) - RightPosStart) *
-                        DRIVE_REV__IN; /// this converts the code into inches
+                DRIVE_REV__IN; /// this converts the code into inches
             if (pos + stop_dist(vel, accel) >= dist) {
-            vel -= accel / ticksPerSec; // decell
+                vel -= accel / ticksPerSec; // decell
             } else if (vel < maxVel) {
-            vel += accel / ticksPerSec;
+                vel += accel / ticksPerSec;
             } else {
-            vel = maxVel;
+                vel = maxVel;
             }
             pos += vel / ticksPerSec;
 
@@ -137,7 +59,7 @@ void drive_straight(float dist, float maxVel, float accel) {
             drive_l.spin(DIR_FWD, DRIVE_KP * l_pos_err + vel_rpm + DIR_KP - dir_err, VEL_RPM);
 
             currentTimer += tickSpeed; // wait until tickSpeed milliseconds have
-                                        // passed since last iteration of while loop
+                                       // passed since last iteration of while loop
             while (sands_of_time.time(msec) < currentTimer) {
                 // wait
             }
@@ -146,15 +68,15 @@ void drive_straight(float dist, float maxVel, float accel) {
     else if (dist < 0) {
         while(vel >= 0){
             currLeft = (drive_l.position(turns) - LeftPosStart) *
-                        DRIVE_REV__IN;
+                DRIVE_REV__IN;
             currRight = (drive_r.position(turns) - RightPosStart) *
-                        DRIVE_REV__IN; 
+                DRIVE_REV__IN; 
             if(pos - stop_dist(vel, accel) <= dist) {
-            vel -= accel / ticksPerSec;
+                vel -= accel / ticksPerSec;
             } else if(vel < maxVel) {
-            vel += accel / ticksPerSec;
+                vel += accel / ticksPerSec;
             } else {
-            vel = maxVel;
+                vel = maxVel;
             }
             pos -= vel/ ticksPerSec;
 
@@ -167,7 +89,7 @@ void drive_straight(float dist, float maxVel, float accel) {
             drive_l.spin(DIR_FWD, DRIVE_KP * l_pos_err - vel_rpm - DIR_KP * dir_err, VEL_RPM);
 
             currentTimer += tickSpeed; // wait until tickSpeed milliseconds have
-                                        // passed since last iteration of while loop
+                                       // passed since last iteration of while loop
             while (sands_of_time.time(msec) < currentTimer) {
             }
 
@@ -203,7 +125,7 @@ void drive_turn(float deg, float outerRadius, float maxVel, float accel, bool re
     float rad_remaining;
 
     if (radians > (inrtl.rotation(degrees)*GYRO_CORRECTION) / RAD__DEG) { // turning right
-    printf("right\n");
+        printf("right\n");
         while (vel >= 0) {
             printf("corrected gyro: %f\n", inrtl.rotation(degrees)*GYRO_CORRECTION);
             printf("gyro: %f\n\n", inrtl.rotation(degrees));
@@ -240,7 +162,7 @@ void drive_turn(float deg, float outerRadius, float maxVel, float accel, bool re
             }
 
             currentTimer += tickSpeed; // wait until tickSpeed milliseconds have
-                                        // passed since last iteration of while loop
+                                       // passed since last iteration of while loop
             while (sands_of_time.time(msec) < currentTimer) {
                 // wait
             }
@@ -286,7 +208,7 @@ void drive_turn(float deg, float outerRadius, float maxVel, float accel, bool re
             }
 
             currentTimer += tickSpeed; // wait until tickSpeed milliseconds have
-                                        // passed since last iteration of while loop
+                                       // passed since last iteration of while loop
             while (sands_of_time.time(msec) < currentTimer) {
                 // wait
             }
@@ -299,15 +221,65 @@ void drive_turn(float deg, float outerRadius, float maxVel, float accel, bool re
     printf("curr_head: %f\n", current_heading);
 }
 
+void press_back(bool toggle_pressing) {
+    if (toggle_pressing) {
+        drive_r.setMaxTorque(20, PCT_PCT);
+        drive_l.setMaxTorque(20, PCT_PCT);
+        drive_r.spin(DIR_FWD, -20, VEL_PCT);
+        drive_l.spin(DIR_FWD, -20, VEL_PCT);
+    }
+    else {
+        drive_r.setMaxTorque(100, PCT_PCT);
+        drive_l.setMaxTorque(100, PCT_PCT);
+        drive_r.spin(DIR_FWD, 0, VEL_PCT);
+        drive_l.spin(DIR_FWD, 0, VEL_PCT);
+    }
+}
+
+// Controls flywheel in auton, maybe. No idea what im doing
+int auton_fly_pid(void) {
+    float kP = 0.058;
+    float kI = 0.0;
+    float kD = 0.1;
+
+    double tune_consts[3];
+
+    float baseline = 9.7;
+    float target_vel = fly_rpm;
+    float current_vel = FLY_VEL;
+    float sum = 0;
+    float prev_error = 0;
+
+    float pid_adjustment;
+
+    while (fly_pid_enabled) {
+        tune_consts[0] = kP;
+        tune_consts[1] = kI;
+        tune_consts[2] = kD;
+        current_vel = FLY_VEL;
+
+        pid_adjustment = pid(target_vel, current_vel, &sum, &prev_error, tune_consts);
+        if (pid_adjustment < baseline * -1) pid_adjustment = baseline * -1;
+
+        flywheel.spin(DIR_FWD, baseline + pid_adjustment, VLT_VLT);
+
+        sum = 0;
+
+        this_thread::sleep_for(20);
+    } 
+    flywheel.stop(brakeType::coast);
+    return 0;
+}
+
 bool within_range(double value, double base, double range) {
     return ((value <= base + range) && (value >= base - range));
 }
 
 float stop_dist(float current_vel, float accel, float target_vel) {     // 4886T's code - learn physics
-  return -(target_vel * target_vel - current_vel * current_vel) / (2 * accel); 
-  //derived from physics equation V^2 = (V0)^2 +  2a(X-X0)
-  //set V to targetVel and solve for X-X0,
-  // = (targetVel^2 - currentVel^2)/2*accel
+    return -(target_vel * target_vel - current_vel * current_vel) / (2 * accel); 
+    //derived from physics equation V^2 = (V0)^2 +  2a(X-X0)
+    //set V to targetVel and solve for X-X0,
+    // = (targetVel^2 - currentVel^2)/2*accel
 }
 
 int *side_pressed(void) {

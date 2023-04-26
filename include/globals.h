@@ -68,6 +68,8 @@ extern float drive_speed;
 // Autonomous
 extern int auton_mode;
 extern float current_heading;
+extern float fly_rpm;
+extern bool fly_pid_enabled;
 
 // Selection
 extern const char *control_types[6];

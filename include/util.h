@@ -32,6 +32,15 @@ void drive_turn(float deg, float outerRadius, float maxVel, float accel, bool re
 
 void fly_pid(float rpm, char competition_state);
 
+void press_back(bool toggle_pressing);
+
+/**
+ * @brief threaded(?) auton flywheel control
+ *
+ * @param rpm RPM at whcih flywheel should spin
+ */
+int auton_fly_pid();
+
 bool within_range(double value, double base, double range);
 float stop_dist(float current_vel, float accel, float target_vel = 0);
 

@@ -17,12 +17,11 @@ using namespace vex;
 competition Competition;
 
 int main() {
-  // opcontrol();
-  pre_auton();
-  Competition.autonomous(autonomous);
-  Competition.drivercontrol(opcontrol);
+    pre_auton();
+    Competition.autonomous(autonomous);
+    Competition.drivercontrol(opcontrol);
 
-  while (true) {
-    task::sleep(20);
-  }
+    while (true) {
+        task::sleep(20);
+    }
 }
